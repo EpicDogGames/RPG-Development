@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 public class Quest : MonoBehaviour {
 
@@ -44,9 +45,13 @@ public class Quest : MonoBehaviour {
 		switch (QuestName)  {
 			case "Guardian of the Grove":
 				Debug.Log ("Guardian of the Grove Quest Completed");
+				QuestUIManager.Instance.questStatus.text = "COMPLETED";
+				QuestUIManager.Instance.questStatusImage.GetComponent<Image> ().color = new Color32 (0, 118, 255, 255);
 				break;
 			case "Guardian of the Village":
 				Debug.Log ("Guardian of the Village Quest Completed");
+				QuestUIManager.Instance.questStatus.text = "COMPLETED";
+				QuestUIManager.Instance.questStatusImage.GetComponent<Image> ().color = new Color32 (0, 118, 255, 255);
 				break;
 			case "Guardian of the Sacred Forest":
 				Debug.Log ("Guardian of the Sacred Forest Quest Completed");
@@ -54,6 +59,8 @@ public class Quest : MonoBehaviour {
 				if (curse != null)  {
 					curse.SetActive (false);
 				}
+				QuestUIManager.Instance.questStatus.text = "COMPLETED";
+				QuestUIManager.Instance.questStatusImage.GetComponent<Image> ().color = new Color32 (0, 118, 255, 255);
 				break;
 		}
 
