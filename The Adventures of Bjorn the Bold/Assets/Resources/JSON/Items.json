@@ -1,0 +1,227 @@
+[
+  {
+    "objectSlug": "staff0",
+    "itemName": "Ancient Staff",
+    "description": "A fireball staff of dubious power.",
+	"itemType": "Weapon",
+    "actionName": "Equip",
+    "itemModifier": 0,
+    "stats": [
+       {
+         "statType": "Power",
+         "baseValue": 2,
+         "statName": "Power"
+       },
+       {
+         "statType": "Toughness",
+         "baseValue": 2,
+         "statName": "Toughness"
+       }
+     ]
+  },
+  {
+    "objectSlug": "sword0",
+    "itemName": "Old Sword",
+    "description": "A well-worn blade of unremarkable quality that your father gave to you.",
+	"itemType": "Weapon",
+    "actionName": "Equip",
+    "itemModifier": 0,
+    "stats": [
+       {
+         "statType": "Power",
+         "baseValue": 4,
+         "statName": "Power"
+       },
+       {
+         "statType": "Toughness",
+         "baseValue": 2,
+         "statName": "Toughness"
+       }
+     ]
+  },
+  {
+    "objectSlug": "shield0",
+	"itemName": "Old Wooden Shield",
+	"description": "A well-used wooden shield that has seen better days. Will give a small amount of protection.",
+	"itemType": "Shield",
+	"actionName": "Equip",
+	"itemModifier": 0,
+	"stats": [
+      {
+        "statType": "Power",
+		"baseValue": 0,
+		"statName": "Power"
+	  },
+	  {
+        "statType": "Toughness",
+		"baseValue": 10,
+		"statName": "Toughness"
+	  }
+	]
+  },
+  {
+    "objectSlug": "shield1",
+	"itemName": "Sturdy Metal Shield",
+	"description": "A newly-minted shield that has decent toughness to help ward off strong attacks.",
+	"itemType": "Shield",
+	"actionName": "Equip",
+	"itemModifier": 0,
+	"stats":  [
+	   {
+         "statType": "Power",
+		 "baseValue": 5,
+		 "statName": "Power"
+  	   },
+	   {
+        "statType": "Toughness",
+		"baseValue": 20,
+		"statName": "Toughness"
+	   }
+	]
+  },
+  {
+    "objectSlug": "axe1",
+    "itemName": "Battleaxe",
+    "description": "Goblin King's Battleaxe - reward from Guardian of the Grove.",
+	"itemType": "Weapon",
+    "actionName": "Equip",
+    "itemModifier": 0,
+    "stats": [
+       {
+         "statType": "Power",
+         "baseValue": 8,
+         "statName": "Power"
+       },
+       {
+         "statType": "Toughness",
+         "baseValue": 6,
+         "statName": "Toughness"
+       }
+     ]
+  },
+  {
+    "objectSlug": "mace0",
+    "itemName": "Studded Mace",
+    "description": "A well-used mace left behind by someone who has no use for it anymore.",
+	"itemType": "Weapon",
+    "actionName": "Equip",
+    "itemModifier": 0,
+    "stats": [
+       {
+         "statType": "Power",
+         "baseValue": 6,
+         "statName": "Power"
+       },
+       {
+         "statType": "Toughness",
+         "baseValue": 10,
+         "statName": "Toughness"
+       }
+     ]
+  },
+  {
+    "objectSlug": "weakHealthDraft",
+    "itemName": "Healing Draft",
+    "description": "A weak drink to help you restore some of your health.",
+	"itemType": "Consumable",
+    "actionName": "Drink",
+    "itemModifier": 0
+  },
+  {
+    "objectSlug": "healthElixir",
+    "itemName": "Health Elixir",
+    "description": "A powerful drink to help you regain lost health.",
+	"itemType": "Consumable",
+    "actionName": "Drink",
+    "itemModifier": 0
+  },
+  {
+	"objectSlug": "bagOfHealthElixirs",
+	"itemName": "Bag of Health Elixirs",
+	"description": "Bag containing several vials of health elixir",
+	"itemType": "Consumable",
+	"actionType": "Drink",
+	"itemModifier": 0
+  },
+  {
+    "objectSlug": "manaElixir",
+    "itemName": "Mana Elixir",
+    "description": "A drink to help you regain lost magical powers.",
+	"itemType": "Consumable",
+    "actionName": "Drink",
+    "itemModifier": 0
+  },
+  {
+	"objectSlug": "bagOfManaElixirs",
+	"itemName": "Bag of Mana Elixirs",
+	"description": "Bag containing several vials of mana elixir",
+	"itemType": "Consumable",
+	"actionType": "Drink",
+	"itemModifier": 0
+  },
+  {
+	"objectSlug": "bagOfHealthAndManaElixirs",
+	"itemName": "Bag of Health and Mana Elixirs",
+	"description": "Bag containing several vials of both health and mana elixirs",
+	"itemType": "Consumable",
+	"actionType": "Drink",
+	"itemModifier": 0
+  },
+  {
+    "objectSlug": "bone",
+	"itemName": "Stolen Bone of the Guardian of the Grove",
+	"description": "This bone was stolen from the Guardian of the Grove and must be returned.",
+	"itemType": "Quest",
+	"actionName": "Collect",
+	"itemModifier": 0
+  },
+  {
+    "objectSlug": "sacredBook",
+	"itemName": "Knowledge of the Sacred Forest",
+	"description": "This book contains all the secrets to healing the sacred forest.",
+	"itemType": "Quest",
+	"actionName": "Collect",
+	"itemModifier": 0
+  },
+  {
+    "objectSlug": "legendBook",
+	"itemName": "Legends of the Sacred Forest",
+	"description": "This book contains all the legends of the sacred forest.",
+	"itemType": "Quest",
+	"actionName": "Collect",
+	"itemModifier": 0
+  },
+  {
+    "objectSlug": "creaturesBook",
+	"itemName": "Creatures of the Sacred Forest",
+	"description": "This book contains all the creatures found within the sacred forest.",
+	"itemType": "Quest",
+	"actionName": "Collect",
+	"itemModifier": 0
+  },
+  {
+    "objectSlug": "spiritsBook",
+	"itemName": "Spirits of the Sacred Forest",
+	"description": "This book contains all the spirits found within the sacred forest.",
+	"itemType": "Quest",
+	"actionName": "Collect",
+	"itemModifier": 0
+  },
+  {
+    "objectSlug": "lostPage",
+	"itemName": "Lost Page from Sacred Book",
+	"description": "This page was torn from the sacred book that the Guardian of the Sacred Forest needs to left the curse.",
+	"itemType": "Quest",
+	"actionName": "Collect",
+	"itemModifier": 0
+  },
+  {
+    "objectSlug": "rogue",
+	"itemName": "Rogue in the Guardian's Grove",
+	"description": "This villian can be found in the Guardian's Grove. He has made the grove a dangerous place to visit and must be destroyed.",
+	"itemType": "Quest",
+	"actionName": "Kill",
+	"itemModifier": 0
+  }
+]
+    

@@ -1,0 +1,107 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.IO;
+
+public class GameManager : MonoBehaviour {
+
+	// this script is called from SplashScreen since it only needs to be called once
+
+	public static GameManager Instance;
+
+	private int screenResolution;
+	private bool isFullScreen;
+	private DirectoryInfo dirInfo;
+
+	// Use this for initialization
+	void Awake () {
+		if (Instance != null && Instance != this)  {
+			Destroy (gameObject);
+		}
+		else  {
+			Instance = this;
+		}
+		Debug.Log ("Running the game manager");
+		InitializeVariables ();
+		InitializeDirectories ();
+		ApplyGameSettings ();
+	}
+	
+	void InitializeVariables()  {
+		if (!PlayerPrefs.HasKey("Game Initialized"))  {
+			Debug.Log ("Game being initialized");
+			GamePreferences.SetMusicState (1);
+			GamePreferences.SetMusicVolume (0.5f);
+			GamePreferences.SetFXState (1);
+			GamePreferences.SetFXVolume (0.8f);
+			GamePreferences.SetFullscreenState(0);
+			GamePreferences.SetScreenResolution (1);
+			GamePreferences.SetQualitySetting (2);
+
+			PlayerPrefs.SetInt ("Game Initialized", 123);
+		}
+		else  {
+			Debug.Log ("Game has already been initialized");
+			Debug.Log ("Music Settings : " + GamePreferences.GetMusicState () + ", " + GamePreferences.GetMusicVolume ());
+			Debug.Log ("FX Settings : " + GamePreferences.GetFXState () + ", " + GamePreferences.GetFXVolume ());
+			Debug.Log ("Screen Resolution : " + GamePreferences.GetScreenResolution () + ", " + GamePreferences.GetFullscreenState ());
+			Debug.Log ("Quality Settings : " + GamePreferences.GetQualitySetting ());
+		}
+	}
+
+	void ApplyGameSettings()  {
+		// set audio preferences
+		if (GamePreferences.GetMusicState() == 1)  {
+			MusicManager.Instance.PlayMusic (true);
+			MusicManager.Instance.ChangeVolume (GamePreferences.GetMusicVolume ());
+		}
+		else  {
+			MusicManager.Instance.PlayMusic (false);
+		}
+		// set video preferences
+		int screenResolution = GamePreferences.GetScreenResolution ();
+		if (screenResolution == 0)  {
+			if (GamePreferences.GetFullscreenState () == 1) {	
+				Screen.SetResolution (1280, 720, true);
+			}
+			else  {
+				Screen.SetResolution (1280, 720, false);
+			}
+		}
+		else if (screenResolution == 1)  {
+			if (GamePreferences.GetFullscreenState () == 2) {
+				Screen.SetResolution (1600, 900, true);
+			}
+			else  {
+				Screen.SetResolution (1600, 900, false);
+			}
+		}
+		else  {
+			if (GamePreferences.GetFullscreenState () == 2) {
+				Screen.SetResolution (1920, 1080, true);
+			}
+			else  {
+				Screen.SetResolution (1920, 1080, false);
+			}
+		}
+		QualitySettings.SetQualityLevel (GamePreferences.GetQualitySetting ());
+	}
+
+	void InitializeDirectories()  {
+		// set up saves directory under persistentDataPath if it doesn't exist
+		dirInfo = new DirectoryInfo (Application.persistentDataPath + "/" + "Saves");
+		if (!dirInfo.Exists)  {
+			dirInfo.Create ();
+		}
+		// set up inventory directory under persistentDataPath if it doesn't exist
+		dirInfo = new DirectoryInfo (Application.persistentDataPath + "/" + "Inventory");
+		if (!dirInfo.Exists)  {
+			dirInfo.Create ();
+		}
+		// set up quest directory under persistentDataPath if it doesn't exist
+		dirInfo = new DirectoryInfo (Application.persistentDataPath + "/" + "Quests");
+		if (!dirInfo.Exists)  {
+			dirInfo.Create ();
+		}
+	}
+}
