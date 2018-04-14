@@ -93,13 +93,18 @@ public class GameManager : MonoBehaviour {
 		if (!dirInfo.Exists)  {
 			dirInfo.Create ();
 		}
-		// set up inventory directory under persistentDataPath if it doesn't exist
-		dirInfo = new DirectoryInfo (Application.persistentDataPath + "/" + "Inventory");
+		// set up player directory under persistentDataPath if it doesn't exist
+		dirInfo = new DirectoryInfo (Application.persistentDataPath + "/" + "Player");
 		if (!dirInfo.Exists)  {
 			dirInfo.Create ();
 		}
-		// set up quest directory under persistentDataPath if it doesn't exist
+		// set up quest directory (for in-game progress) under persistentDataPath if it doesn't exist
 		dirInfo = new DirectoryInfo (Application.persistentDataPath + "/" + "Quests");
+		if (!dirInfo.Exists)  {
+			dirInfo.Create ();
+		}
+		// set up saved quest directory (for saved game option) under persistentDataPath if it doesn't exist
+		dirInfo = new DirectoryInfo (Application.persistentDataPath + "/" + "SavedQuests");
 		if (!dirInfo.Exists)  {
 			dirInfo.Create ();
 		}

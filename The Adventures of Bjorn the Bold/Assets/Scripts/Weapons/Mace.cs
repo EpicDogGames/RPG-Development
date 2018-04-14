@@ -24,7 +24,7 @@ public class Mace : MonoBehaviour, IWeapon {
 		isAttacking = true;
 		if (GamePreferences.GetFXState() == 1)  {
 			if (playerAnimator.GetCurrentAnimatorStateInfo (0).IsName ("Standing Idle")) {
-				audioSource.PlayOneShot (maceSwing, 0.05f);
+				audioSource.PlayOneShot (maceSwing, 0.1f);
 			}
 		}
 		if (playerAnimator.GetCurrentAnimatorStateInfo (0).IsName ("Standing Idle")) {

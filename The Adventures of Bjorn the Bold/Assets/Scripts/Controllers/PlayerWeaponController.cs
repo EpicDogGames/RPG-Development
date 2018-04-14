@@ -13,10 +13,13 @@ public class PlayerWeaponController : MonoBehaviour {
 	private CharacterStats characterStats;
 	private Animator playerAnimator;
 
+	private string weaponInHand;
+
 	void Start()  {
 		spawnProjectile = transform.Find("ProjectileSpawn");
 		characterStats = GetComponent<Player>().characterStats;
 		playerAnimator = GetComponent<Animator> ();
+		weaponInHand = "";
 	}
 
 	void Update()  {
@@ -45,6 +48,7 @@ public class PlayerWeaponController : MonoBehaviour {
 		equippedWeapon.Stats = itemToEquip.Stats;
 		EquippedWeapon.transform.SetParent (playerHand.transform);
 		currentlyEquippedWeapon = itemToEquip;
+		weaponInHand = currentlyEquippedWeapon.ObjectSlug;
 		characterStats.AddStatBonus (itemToEquip.Stats);
 		equippedWeapon.CharacterStats = characterStats;
 		UIEventController.ItemEquipped (itemToEquip);
@@ -55,6 +59,7 @@ public class PlayerWeaponController : MonoBehaviour {
 	public void UnequipWeapon() {
 		//Debug.Log ("In the unequipped section (start) - Player is Armed: " + playerAnimator.GetBool("isArmed"));
 		playerAnimator.SetBool ("isArmed", false);
+		weaponInHand = "";
 		InventoryController.Instance.GiveItem (currentlyEquippedWeapon.ObjectSlug);
 		characterStats.RemoveStatBonus (EquippedWeapon.GetComponent<IWeapon> ().Stats);
 		Destroy (playerHand.transform.GetChild (0).gameObject);
@@ -64,5 +69,9 @@ public class PlayerWeaponController : MonoBehaviour {
 
 	public void PerformWeaponAttack()  {
 		equippedWeapon.PerformAttack ();
+	}
+
+	public string CheckForWeaponInHand()  {
+		return weaponInHand;
 	}
 }

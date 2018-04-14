@@ -12,9 +12,12 @@ public class PlayerShieldController : MonoBehaviour {
 	private CharacterStats characterStats;
 	private Animator playerAnimator;
 
+	private string shieldInHand;
+
 	void Start()  {
 		characterStats = GetComponent<Player> ().characterStats;
 		playerAnimator = GetComponent<Animator> ();
+		shieldInHand = "";
 	}
 
 	public void EquipShield(Item itemToShield)  {
@@ -27,6 +30,7 @@ public class PlayerShieldController : MonoBehaviour {
 		equippedShield.Stats = itemToShield.Stats;
 		EquippedShield.transform.SetParent (playerHand.transform);
 		currentlyEquippedShield = itemToShield;
+		shieldInHand = currentlyEquippedShield.ObjectSlug;
 		characterStats.AddStatBonus (itemToShield.Stats);
 		equippedShield.CharacterStats = characterStats;
 		UIEventController.ItemShielded (itemToShield);
@@ -35,6 +39,7 @@ public class PlayerShieldController : MonoBehaviour {
 
 	public void UnequipShield()  {
 		playerAnimator.SetBool ("isShielded", false);
+		shieldInHand = "";
 		InventoryController.Instance.GiveItem (currentlyEquippedShield.ObjectSlug);
 		characterStats.RemoveStatBonus (EquippedShield.GetComponent<IShield> ().Stats);
 		Destroy (playerHand.transform.GetChild (0).gameObject);
@@ -43,5 +48,9 @@ public class PlayerShieldController : MonoBehaviour {
 
 	public void PerformRaiseShield()  {
 		equippedShield.RaiseShield ();
+	}
+
+	public string CheckForShieldInHand()  {
+		return shieldInHand;
 	}
 }

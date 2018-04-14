@@ -124,6 +124,7 @@ public class QuestUIManager : MonoBehaviour {
 	}
 
 	// if the first quest set, populate the quest panel with details of the specific quest
+	// this method is used for a new game
 	public void SetupSingleQuest(Quest quest)  {
 
 		Debug.Log ("Setting up single quest");
@@ -148,7 +149,52 @@ public class QuestUIManager : MonoBehaviour {
 			questStatus.text = "IN PROGRESS";
 		}
 		ResetQuestItemList ();
-	
+	}
+
+	// if the first quest set, populate the quest panel with details of the specific quest
+	// this method is used for an old saved game
+	public void SetupSingleOldQuest(Quest quest, string xmlFile)  {
+		// get quest name and description as well as goal descriptions
+		if (System.IO.File.Exists(Application.persistentDataPath + "/Quests/" + xmlFile))  {
+			// restore quest information
+			QDM.Load (Application.persistentDataPath + "/Quests/" + xmlFile);
+			// populate the quest panel
+			questName.text = QDM.QD.QI.qName;
+			questImage.sprite = Resources.Load<Sprite> ("UI/QuestPanel/Quests/" + QDM.QD.QI.qImageName);
+			string description = QDM.QD.QI.qDescription;
+			description += "\n\n";
+			description += "Tasks:\n";
+			int j = 1;
+			for (int i=0; i<QDM.QD.GI.Count; i++)  {
+				description += j + ") " + QDM.QD.GI[i].gDescription + "\n";
+				j++;
+			}
+			questDescription.text = description;
+		}
+		ResetQuestItemList ();
+		// repopulate the questItems
+		bool questItemsSaved = false;
+		for (int i=0; i<QDM.QD.GI.Count; i++)  {
+			if (QDM.QD.GI[i].gCurrentAmount > 0)  {
+				questItemsSaved = true;
+				for (int j = 0; j < QDM.QD.GI[i].gCurrentAmount; j++) {
+					QuestController.Instance.ReloadQuestItem (QDM.QD.GI[i].gTarget);
+				}
+			}
+		}
+		if (questItemsSaved)  {
+			SortQuestItems ();
+			RefreshQuestUI ();
+		}
+		// show status of the quest
+		if (QDM.QD.QI.qCompleted)  {
+			questStatusImage.GetComponent<Image> ().color = new Color32 (0, 118, 255, 255);
+			questStatus.text = "COMPLETED";
+		}
+		else  {
+			questStatusImage.GetComponent<Image> ().color = new Color32 (215, 38, 9, 255);
+			questStatus.text = "IN PROGRESS";
+		}
 	}
 
 	// populate the quests panel with all quests as they are received

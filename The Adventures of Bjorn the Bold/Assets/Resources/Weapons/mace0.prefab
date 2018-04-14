@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 82735565520235344}
-  maceSwing: {fileID: 8300000, guid: 2865e1fbfbc1848418ba1d5ac1da8de0, type: 3}
+  maceSwing: {fileID: 8300000, guid: 6b9dc7dcf37e9d742929733d3fece341, type: 3}
 --- !u!114 &114896055012651468
 MonoBehaviour:
   m_ObjectHideFlags: 1

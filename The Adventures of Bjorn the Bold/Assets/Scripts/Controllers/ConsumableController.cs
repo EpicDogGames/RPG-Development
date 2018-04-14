@@ -39,6 +39,7 @@ public class ConsumableController : MonoBehaviour {
 			}
 		}
 		InventoryController.Instance.RemoveItem (item);
+		//InventoryController.Instance.CreateInventoryDataXMLFile ();
 	}
 
 }

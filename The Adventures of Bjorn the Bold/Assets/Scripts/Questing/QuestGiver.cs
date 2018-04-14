@@ -28,7 +28,7 @@ public class QuestGiver : NPC {
 		}
 	}
 
-	void AssignQuest()  {
+	public void AssignQuest()  {
 		AssignedQuest = true;
 		playerQuest = (Quest)quests.AddComponent (System.Type.GetType(questType));
 	}
@@ -47,5 +47,11 @@ public class QuestGiver : NPC {
 			DialogueManager.Instance.AddNewDialogue (playerQuest.inProgressDialogue, name);
 
 		}
+	}
+
+	public void AssignedQuestFinished()  {
+		playerQuest = (Quest)quests.AddComponent (System.Type.GetType(questType));
+		AssignedQuestCompleted = true;
+		AssignedQuest = false;
 	}
 }

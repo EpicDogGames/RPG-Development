@@ -10,6 +10,11 @@ public class QuestController : MonoBehaviour {
 
 	public List<Item> questItems = new List<Item> ();
 
+	public GameObject guardian;
+	public GameObject cursedMist;
+	public Animator gateAnimator;
+	public GameObject gateBlocker;
+
 	private DirectoryInfo dirInfo;
 	private QuestDataManager QDM = null;
 
@@ -23,6 +28,58 @@ public class QuestController : MonoBehaviour {
 			Instance = this;
 		}
 		QDM = new QuestDataManager ();
+		LoadOldQuests ();
+	}
+
+	void LoadOldQuests()  {
+		DirectoryInfo dir = new DirectoryInfo (Application.persistentDataPath + "/Quests");
+		FileInfo[] info = dir.GetFiles ("*.xml");
+		if (info.Length != 0) {
+			foreach (FileInfo f in info) {
+				string fName = f.Name;
+				int idx = fName.LastIndexOf ('.');
+				string questGiver = fName.Substring (0, idx);
+				switch (questGiver)
+				{
+				case "GuardianOfTheGrove":
+					Debug.Log ("Guardian of the Grove Quest must be loaded");
+					QDM.Load (Application.persistentDataPath + "/Quests/GuardianOfTheGrove.xml");
+					if (QDM.QD.QI.qCompleted) {
+						GameObject.Find("Guardian of the Grove").GetComponent<QuestGiver>().AssignedQuestFinished();
+					} 
+					else {
+						GameObject.Find ("Guardian of the Grove").GetComponent<QuestGiver> ().AssignQuest ();
+					}
+					break;
+				case "GuardianOfTheVillage":
+					Debug.Log("Guardian of the Village Quest must be loaded");
+					QDM.Load (Application.persistentDataPath + "/Quests/GuardianOfTheVillage.xml");
+					if (QDM.QD.QI.qCompleted)  {
+						guardian.gameObject.SetActive (true);
+						GameObject.Find ("Guardian of the Village").GetComponent<QuestGiver> ().AssignedQuestFinished ();
+					}
+					else  {
+						guardian.gameObject.SetActive (false);
+						GameObject.Find("Guardian of the Village").GetComponent<QuestGiver>().AssignQuest();
+					}
+					break;
+				case "GuardianOfTheSacredForest":
+					Debug.Log("Guardian of the Sacred Forest Quest must be loaded");
+					guardian.gameObject.SetActive (true);
+					gateAnimator.SetTrigger ("OpenGate");
+					Destroy (gateBlocker);
+					QDM.Load (Application.persistentDataPath + "/Quests/GuardianOfTheSacredForest.xml");
+					if (QDM.QD.QI.qCompleted)  {
+						cursedMist.gameObject.SetActive (false);
+						GameObject.Find ("Guardian of the Sacred Forest").GetComponent<QuestGiver> ().AssignedQuestFinished ();
+					}
+					else {
+						GameObject.Find ("Guardian of the Sacred Forest").GetComponent<QuestGiver> ().AssignQuest ();
+					}
+					break;
+				}
+			}
+		}
 	}
 
 	// these two methods for when a quest item is picked up and need to be added to the questItems list

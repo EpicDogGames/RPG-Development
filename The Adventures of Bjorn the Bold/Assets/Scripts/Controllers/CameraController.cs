@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour {
@@ -18,8 +19,10 @@ public class CameraController : MonoBehaviour {
 
 	void Update()  {
 		// scrolling mouse wheel in and out sets the zoom level
-		currentZoom -= Input.GetAxis ("Mouse ScrollWheel") * zoomSpeed;
-		currentZoom = Mathf.Clamp (currentZoom, minZoom, maxZoom);
+		if (Input.GetAxisRaw ("Mouse ScrollWheel") != 0 && !EventSystem.current.IsPointerOverGameObject ()) {
+			currentZoom -= Input.GetAxis ("Mouse ScrollWheel") * zoomSpeed;
+			currentZoom = Mathf.Clamp (currentZoom, minZoom, maxZoom);
+		}
 		// pushing A or D rotates camera around player with A panning to left and D panning to right
 		currentYawInput += Input.GetAxis ("Horizontal") * yawSpeed * Time.deltaTime;
 	}

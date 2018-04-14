@@ -5,8 +5,16 @@ using System.IO;
 
 public class GuardianOfTheGroveQuest : Quest {
 
+	private QuestDataManager QDM = null;
+	private bool questXMLExists;
+	private KillGoal killGoal;
+	private CollectionGoal collectionGoal;
+
 	// Use this for initialization
 	void Start () {
+
+		QDM = new QuestDataManager ();
+		questXMLExists = false;
 
 		// define xml file that will contain quest details
 		QuestXMLFile = "GuardianOfTheGrove.xml";
@@ -33,22 +41,49 @@ public class GuardianOfTheGroveQuest : Quest {
 		};
 
 		// setting up the goals
-		Goals = new List<Goal> {
-			new KillGoal(this, "kill", "rogue", "Kill 10 rogues", false, 0, 10),
-			new CollectionGoal(this, "collect", "bone", "Collect 5 stolen bones", false, 0, 5)
-		};
+		Goals = new List<Goal> ();
+		if (System.IO.File.Exists(Application.persistentDataPath + "/Quests/" + QuestXMLFile))  {
+			// restore quest information from previous saved game
+			questXMLExists = true;
+			QDM.Load (Application.persistentDataPath + "/Quests/" + QuestXMLFile);
+			for (int i=0; i<QDM.QD.GI.Count; i++)  {
+				if (QDM.QD.GI[i].gType == "kill")  {
+					killGoal = new KillGoal (this, QDM.QD.GI[i].gType, QDM.QD.GI[i].gTarget, QDM.QD.GI[i].gDescription, QDM.QD.GI[i].gCompleted, QDM.QD.GI[i].gCurrentAmount, QDM.QD.GI[i].gRequiredAmount);
+					Goals.Add (killGoal);
+				}
+				if (QDM.QD.GI[i].gType == "collect")  {
+					collectionGoal = new CollectionGoal (this, QDM.QD.GI[i].gType, QDM.QD.GI[i].gTarget, QDM.QD.GI[i].gDescription, QDM.QD.GI[i].gCompleted, QDM.QD.GI[i].gCurrentAmount, QDM.QD.GI[i].gRequiredAmount);
+					Goals.Add (collectionGoal);
+				}
+			}
+
+		}
+		else  {
+			KillGoal killGoal = new KillGoal (this, "kill", "rogue", "Kill 10 rogues", false, 0, 10);
+			Goals.Add (killGoal);
+			CollectionGoal collectionGoal = new CollectionGoal (this, "collect", "bone", "Collect 5 stolen bones", false, 0, 5);
+			Goals.Add (collectionGoal);
+		}
 			
 		// go thru each goal in collection and then initialize the method
 		Goals.ForEach (g => g.Init ());
 
 		// build an xml containing quest details for use later
-		QuestController.Instance.PopulateQuestDataXMLFile (this);
+		// populate the quest ui
+		if (!questXMLExists) {
+			QuestController.Instance.PopulateQuestDataXMLFile (this);
+		}
 
 		// populate quest ui .. if only single quest exists, can be displayed in quest panel otherwise must select from listed quests in quests panel
 		DirectoryInfo dir = new DirectoryInfo (Application.persistentDataPath + "/Quests");
 		FileInfo[] info = dir.GetFiles ("*.xml");
 		if (info.Length == 1) {
-			QuestUIManager.Instance.SetupSingleQuest (this);
+			if (!questXMLExists) {
+				QuestUIManager.Instance.SetupSingleQuest (this);
+			}
+			else  {
+				QuestUIManager.Instance.SetupSingleOldQuest (this, QuestXMLFile);
+			}
 		}
 		QuestUIManager.Instance.BuildQuestButton (this);
 	}

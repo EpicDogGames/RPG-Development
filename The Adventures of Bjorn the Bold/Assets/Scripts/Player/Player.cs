@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System.IO;
 
 public class Player : MonoBehaviour {
 
@@ -23,10 +24,27 @@ public class Player : MonoBehaviour {
 	[SerializeField] AudioSource audioSource;
 	[SerializeField] AudioClip deathFX;
 
+	private PlayerDataManager PDM = null;
+	private Player player;
+
 	void Awake()  {
 		characterStats = new CharacterStats (10, 0);
-		currentHealth = maxHealth;
-		currentManaLevel = maxManaLevel;
+		PDM = new PlayerDataManager ();
+		player = GameObject.FindObjectOfType<Player> ();
+		// determine if there is a previously player file to be loaded
+		if (System.IO.File.Exists(Application.persistentDataPath + "/Player/PlayerData.xml"))  {
+			PDM.Load (Application.persistentDataPath + "/Player/PlayerData.xml");
+			// restore player location
+			Vector3 playerPosition = new Vector3 (PDM.GD.PD.playerTransform.X, PDM.GD.PD.playerTransform.Y, PDM.GD.PD.playerTransform.Z);
+			playerAgent.Warp (playerPosition);
+			// restore health and mana levels
+			currentHealth = PDM.GD.PD.playerCurrentHealth;
+			currentManaLevel = PDM.GD.PD.playerCurrentMana;
+		}
+		else  {
+			currentHealth = maxHealth;
+			currentManaLevel = maxManaLevel;
+		}
 		StartCoroutine (addHealthOverTime ());
 		UIEventController.PlayerHealthChanged (this.currentHealth, this.maxHealth);
 		UIEventController.PlayerManaChanged (this.currentManaLevel, this.maxManaLevel);
@@ -110,6 +128,23 @@ public class Player : MonoBehaviour {
 		deathPanel.SetActive (true);
 		playerAgent.Warp (respawnLocation.position);
 		StartCoroutine (RespawnPlayerAfterDeath());
+	}
+
+	public void SavePlayerData()  {
+		Debug.Log ("Writing game data for save");
+		File.Create (Application.persistentDataPath + "/Saves/GameSave.xml").Dispose();
+		PDM.GD.PD.playerTransform.X = player.transform.position.x;
+		PDM.GD.PD.playerTransform.Y = player.transform.position.y;
+		PDM.GD.PD.playerTransform.Z = player.transform.position.z;
+		PDM.GD.PD.playerTransform.RotX = player.transform.eulerAngles.x;
+		PDM.GD.PD.playerTransform.RotY = player.transform.eulerAngles.y;
+		PDM.GD.PD.playerTransform.RotZ = player.transform.eulerAngles.z;
+		PDM.GD.PD.playerTransform.ScaleX = player.transform.localScale.x;
+		PDM.GD.PD.playerTransform.ScaleY = player.transform.localScale.y;
+		PDM.GD.PD.playerTransform.ScaleZ = player.transform.localScale.z;
+		PDM.GD.PD.playerCurrentHealth = currentHealth;
+		PDM.GD.PD.playerCurrentMana = currentManaLevel;
+		PDM.Save (Application.persistentDataPath + "/Player/PlayerData.xml");
 	}
 
 	IEnumerator addHealthOverTime()  {
