@@ -27,6 +27,16 @@ public class Player : MonoBehaviour {
 	private PlayerDataManager PDM = null;
 	private Player player;
 
+	[SerializeField] GameObject pukiPresent;
+	[SerializeField] GameObject guardianOfWell_BeforePuki;
+	[SerializeField] GameObject guardianOfWell_AfterPuki;
+	[SerializeField] GameObject guardianSearchPuzzle;
+	[SerializeField] GameObject guardianOfChurch_BeforePuki;
+	[SerializeField] GameObject guardianOfChurch_AfterPuki;
+	[SerializeField] GameObject guardianOfChurch_caveMazeTrigger;
+	[SerializeField] GameObject caveMazeSearchPuzzle;
+	[SerializeField] GameObject hideBellInSteeple;
+
 	void Awake()  {
 		characterStats = new CharacterStats (10, 0);
 		PDM = new PlayerDataManager ();
@@ -40,10 +50,46 @@ public class Player : MonoBehaviour {
 			// restore health and mana levels
 			currentHealth = PDM.GD.PD.playerCurrentHealth;
 			currentManaLevel = PDM.GD.PD.playerCurrentMana;
+			// initialize Puki then determine settings based information in the PlayerData.xml file
+			GamePreferences.SetPukiFound (0);
+			guardianOfWell_BeforePuki.SetActive (true);
+			guardianOfWell_AfterPuki.SetActive (false);
+			guardianOfChurch_BeforePuki.SetActive (true);
+			guardianOfChurch_AfterPuki.SetActive (false);
+			hideBellInSteeple.SetActive (true);
+			// determine whether puki has been added through solving the Guardian Search Puzzle or Cave Maze Search Puzzle
+			bool pukiAddedToPlayer = PDM.GD.PD.pukiAdded;
+			if (pukiAddedToPlayer) {
+				GamePreferences.SetPukiFound (1);
+				pukiPresent.SetActive (true);
+				bool pukiHasMagicShield = PDM.GD.PD.pukiHasMagicShield;
+				if (pukiHasMagicShield) {
+					GamePreferences.SetMagicShieldForPuki (1);
+					guardianOfWell_BeforePuki.SetActive (false);
+					guardianOfWell_AfterPuki.SetActive (true);
+					guardianSearchPuzzle.SetActive (false);
+				}
+				bool pukiHasFirePower = PDM.GD.PD.pukiHasFirePower;
+				if (pukiHasFirePower)  {
+					GamePreferences.SetFirePowerForPuki (1);
+					guardianOfChurch_BeforePuki.SetActive (false);
+					guardianOfChurch_AfterPuki.SetActive (true);
+					guardianOfChurch_caveMazeTrigger.SetActive (false);
+					caveMazeSearchPuzzle.SetActive (false);
+					hideBellInSteeple.SetActive (false);
+				}
+			}
 		}
 		else  {
 			currentHealth = maxHealth;
 			currentManaLevel = maxManaLevel;
+			GamePreferences.SetFirstCombatEncounter (1);
+			GamePreferences.SetPukiFound (0);
+			guardianOfWell_BeforePuki.SetActive (true);
+			guardianOfWell_AfterPuki.SetActive (false);
+			guardianOfChurch_BeforePuki.SetActive (true);
+			guardianOfChurch_AfterPuki.SetActive (false);
+			hideBellInSteeple.SetActive (true);
 		}
 		StartCoroutine (addHealthOverTime ());
 		UIEventController.PlayerHealthChanged (this.currentHealth, this.maxHealth);
@@ -51,6 +97,10 @@ public class Player : MonoBehaviour {
 	}
 
 	public void TakeDamage(int amount)  {
+		// this handles the tutorial popup about combat ... this comes up when player is damaged for this first time but hasn't armed himself before
+		if (GamePreferences.GetFirstCombatEncounter() == 1)  {
+			GamePreferences.SetFirstCombat (1);
+		}
 		//Debug.Log ("Amount Before Toughness Applied : " + amount);
 		// retrieve the toughness value of the character plus whatever equipped with 
 		for (int i=0; i<characterStats.stats.Count; i++)  {
@@ -85,7 +135,7 @@ public class Player : MonoBehaviour {
 		UIEventController.PlayerHealthChanged (this.currentHealth, this.maxHealth);
 	}
 
-	// used by enemy scripts (Goblin_NonPatrolling, Goblin_Patrolling, Spider_NonPatrolling to determine when player has dead 
+	// used by enemy scripts to determine when player dead 
 	//   stops attacking player if he has died
 	public int CheckHealth()  {
 		return currentHealth;
@@ -144,6 +194,24 @@ public class Player : MonoBehaviour {
 		PDM.GD.PD.playerTransform.ScaleZ = player.transform.localScale.z;
 		PDM.GD.PD.playerCurrentHealth = currentHealth;
 		PDM.GD.PD.playerCurrentMana = currentManaLevel;
+		if (GamePreferences.GetPukiFound() == 1)  {
+			PDM.GD.PD.pukiAdded = true;
+		}
+		else  {
+			PDM.GD.PD.pukiAdded = false;
+		}
+		if (GamePreferences.GetMagicShieldForPuki() == 1)  {
+			PDM.GD.PD.pukiHasMagicShield = true;
+		}
+		else  {
+			PDM.GD.PD.pukiHasMagicShield = false;
+		}
+		if (GamePreferences.GetFirePowerForPuki() == 1)  {
+			PDM.GD.PD.pukiHasFirePower = true;
+		}
+		else  {
+			PDM.GD.PD.pukiHasFirePower = false;
+		}
 		PDM.Save (Application.persistentDataPath + "/Player/PlayerData.xml");
 	}
 

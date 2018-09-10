@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 3e7dd644ccf00974caf4792102906b0c
+timeCreated: 1525294535
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Futhark AOE
+  fontNames:
+  - Futhark AOE
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 92adbfc39f780bd4da98675d5af90075, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

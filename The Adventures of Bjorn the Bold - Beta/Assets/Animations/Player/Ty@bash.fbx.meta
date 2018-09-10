@@ -1,0 +1,212 @@
+fileFormatVersion: 2
+guid: b90aebc2c0f06cb4ea31f860f81e9d18
+timeCreated: 1517539156
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Boy:Head
+    100004: Boy:HeadTop_End
+    100006: Boy:Hips
+    100008: Boy:LeftArm
+    100010: Boy:LeftFoot
+    100012: Boy:LeftForeArm
+    100014: Boy:LeftHand
+    100016: Boy:LeftHandIndex1
+    100018: Boy:LeftHandIndex2
+    100020: Boy:LeftHandIndex3
+    100022: Boy:LeftHandIndex4
+    100024: Boy:LeftHandMiddle1
+    100026: Boy:LeftHandMiddle2
+    100028: Boy:LeftHandMiddle3
+    100030: Boy:LeftHandMiddle4
+    100032: Boy:LeftHandPinky1
+    100034: Boy:LeftHandPinky2
+    100036: Boy:LeftHandPinky3
+    100038: Boy:LeftHandPinky4
+    100040: Boy:LeftHandRing1
+    100042: Boy:LeftHandRing2
+    100044: Boy:LeftHandRing3
+    100046: Boy:LeftHandRing4
+    100048: Boy:LeftHandThumb1
+    100050: Boy:LeftHandThumb2
+    100052: Boy:LeftHandThumb3
+    100054: Boy:LeftHandThumb4
+    100056: Boy:LeftLeg
+    100058: Boy:LeftShoulder
+    100060: Boy:LeftToeBase
+    100062: Boy:LeftUpLeg
+    100064: Boy:Neck
+    100066: Boy:RightArm
+    100068: Boy:RightFoot
+    100070: Boy:RightForeArm
+    100072: Boy:RightHand
+    100074: Boy:RightHandIndex1
+    100076: Boy:RightHandIndex2
+    100078: Boy:RightHandIndex3
+    100080: Boy:RightHandIndex4
+    100082: Boy:RightHandMiddle1
+    100084: Boy:RightHandMiddle2
+    100086: Boy:RightHandMiddle3
+    100088: Boy:RightHandMiddle4
+    100090: Boy:RightHandPinky1
+    100092: Boy:RightHandPinky2
+    100094: Boy:RightHandPinky3
+    100096: Boy:RightHandPinky4
+    100098: Boy:RightHandRing1
+    100100: Boy:RightHandRing2
+    100102: Boy:RightHandRing3
+    100104: Boy:RightHandRing4
+    100106: Boy:RightHandThumb1
+    100108: Boy:RightHandThumb2
+    100110: Boy:RightHandThumb3
+    100112: Boy:RightHandThumb4
+    100114: Boy:RightLeg
+    100116: Boy:RightShoulder
+    100118: Boy:RightToeBase
+    100120: Boy:RightUpLeg
+    100122: Boy:Spine
+    100124: Boy:Spine1
+    100126: Boy:Spine2
+    400000: //RootNode
+    400002: Boy:Head
+    400004: Boy:HeadTop_End
+    400006: Boy:Hips
+    400008: Boy:LeftArm
+    400010: Boy:LeftFoot
+    400012: Boy:LeftForeArm
+    400014: Boy:LeftHand
+    400016: Boy:LeftHandIndex1
+    400018: Boy:LeftHandIndex2
+    400020: Boy:LeftHandIndex3
+    400022: Boy:LeftHandIndex4
+    400024: Boy:LeftHandMiddle1
+    400026: Boy:LeftHandMiddle2
+    400028: Boy:LeftHandMiddle3
+    400030: Boy:LeftHandMiddle4
+    400032: Boy:LeftHandPinky1
+    400034: Boy:LeftHandPinky2
+    400036: Boy:LeftHandPinky3
+    400038: Boy:LeftHandPinky4
+    400040: Boy:LeftHandRing1
+    400042: Boy:LeftHandRing2
+    400044: Boy:LeftHandRing3
+    400046: Boy:LeftHandRing4
+    400048: Boy:LeftHandThumb1
+    400050: Boy:LeftHandThumb2
+    400052: Boy:LeftHandThumb3
+    400054: Boy:LeftHandThumb4
+    400056: Boy:LeftLeg
+    400058: Boy:LeftShoulder
+    400060: Boy:LeftToeBase
+    400062: Boy:LeftUpLeg
+    400064: Boy:Neck
+    400066: Boy:RightArm
+    400068: Boy:RightFoot
+    400070: Boy:RightForeArm
+    400072: Boy:RightHand
+    400074: Boy:RightHandIndex1
+    400076: Boy:RightHandIndex2
+    400078: Boy:RightHandIndex3
+    400080: Boy:RightHandIndex4
+    400082: Boy:RightHandMiddle1
+    400084: Boy:RightHandMiddle2
+    400086: Boy:RightHandMiddle3
+    400088: Boy:RightHandMiddle4
+    400090: Boy:RightHandPinky1
+    400092: Boy:RightHandPinky2
+    400094: Boy:RightHandPinky3
+    400096: Boy:RightHandPinky4
+    400098: Boy:RightHandRing1
+    400100: Boy:RightHandRing2
+    400102: Boy:RightHandRing3
+    400104: Boy:RightHandRing4
+    400106: Boy:RightHandThumb1
+    400108: Boy:RightHandThumb2
+    400110: Boy:RightHandThumb3
+    400112: Boy:RightHandThumb4
+    400114: Boy:RightLeg
+    400116: Boy:RightShoulder
+    400118: Boy:RightToeBase
+    400120: Boy:RightUpLeg
+    400122: Boy:Spine
+    400124: Boy:Spine1
+    400126: Boy:Spine2
+    7400000: mixamo.com
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
